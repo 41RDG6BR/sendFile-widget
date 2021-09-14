@@ -1,0 +1,26 @@
+<div>  
+    <form action="http://localhost:3000/single" method="post" enctype="multipart/form-data" data-dojo-attach-point="form">
+      <div>
+        <label for="text">${nls.message}</label>
+        <textarea id="textarea" style="width: 100%;" type="text" name="title" data-dojo-attach-point="title"></textarea>
+      </div>
+      <div>
+        <input type="file" name="image" data-dojo-attach-point="imageFile" />
+      </div>
+      <br />
+      <div>
+        <span style="color: red;" data-dojo-attach-point="lblError"></span>
+      </div>
+      <br />
+      <div>
+        <textarea id="textarea" style="width: 100%;" data-dojo-attach-point="fileToUpload"></textarea>
+      </div> 
+      <div>
+        <input type="submit" value="Upload" data-dojo-attach-point="customBtn"></input>
+      </div>
+    </form>
+    <!-- <form action="http://localhost:3000/single" method="POST" enctype="multipart/form-data" data-dojo-attach-point="form">
+      <input type="file" name="image" data-dojo-attach-point="imageFile">
+      <button type="submit" data-dojo-attach-point="customBtn">Submit</button>
+    </form> -->
+</div>
