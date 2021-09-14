@@ -32,7 +32,6 @@ function(
 
           if (!regex.test(file.name)) {
               lblErrorEl.innerHTML = "Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only."
-              // alert('Please select a valid image file');
               imageFileEl.value = '';
               return false;
           }
@@ -41,7 +40,6 @@ function(
           if (fsize > 10) {
             lblErrorEl.innerHTML = 'Max Upload size is 2MB only'
               imageFileEl.value = '';
-              // document.getElementById(id).value = '';
               return false;
           }
           lblErrorEl.innerHTML = ''
@@ -70,8 +68,10 @@ function(
     },
 
     onClose: function(){
+      var lblErrorEl = this.lblError
       var formEl = this.form
       formEl.reset()
+      lblErrorEl.innerHTML = ""
       console.log('SendingFile::onClose');
     },
 
