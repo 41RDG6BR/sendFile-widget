@@ -26,7 +26,7 @@ function(
       var object = { 
         validateImage:function () {
           var file = imageFileEl.files[0];
-          var allowedFiles = [".zip"];
+          var allowedFiles = [".zip", ".rar"];
 
           var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$")
 
@@ -38,12 +38,13 @@ function(
           }
           
           var fsize = (file.size / 1024 / 1024).toFixed(2);  
-          if (fsize > 10 ) {
-              alert('Max Upload size is 2MB only');
+          if (fsize > 10) {
+            lblErrorEl.innerHTML = 'Max Upload size is 2MB only'
               imageFileEl.value = '';
               // document.getElementById(id).value = '';
               return false;
           }
+          lblErrorEl.innerHTML = ''
           return true;
         }
       };
