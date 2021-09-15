@@ -21,13 +21,11 @@ function(
       var fileToUploadEl = this.fileToUpload
       var lblErrorEl = this.lblError
       var customBtnEl = this.customBtn
-      var formEl = this.form
 
       var object = { 
         validateImage:function () {
           var file = imageFileEl.files[0];
           var allowedFiles = [".zip", ".rar"];
-
           var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$")
 
           if (!regex.test(file.name)) {
@@ -37,7 +35,8 @@ function(
           }
           
           var fsize = (file.size / 1024 / 1024).toFixed(2);  
-          if (fsize > 10) {
+
+          if (fsize > 2) {
             lblErrorEl.innerHTML = 'Max Upload size is 2MB only'
               imageFileEl.value = '';
               return false;
@@ -51,18 +50,10 @@ function(
 
       on(imageFileEl, 'change', function() {
         if(isValid(imageFileEl)) {
+          customBtnEl.disabled = false
           fileToUploadEl.innerHTML = imageFileEl.value
-          // .match(/[\/\\]([\w\d\s\.\-\(\)]+)$/[1])
         } else {
           fileToUploadEl.innerHTML = "No file chosen, yet"
-        }
-      })
-
-      on(customBtnEl, 'click', function(e) {
-        if(!isValid(imageFileEl)) {
-          formEl.reset()
-          e.preventDefault()
-          lblErrorEl.innerHTML = "Please select files to upload having extensions: <b>" + allowedFiles.join(', ') + "</b> only.";
         }
       })
     },
@@ -70,26 +61,13 @@ function(
     onClose: function(){
       var lblErrorEl = this.lblError
       var formEl = this.form
-      formEl.reset()
-      lblErrorEl.innerHTML = ""
-      console.log('SendingFile::onClose');
-    },
+      var fileToUploadEl = this.fileToUpload
+      var customBtnEl = this.customBtn
 
-    // on(imageFileEl, "onProgress", function(data){
-    //   console.warn("onProgress", data);
-    //   dojo.byId("fileToUpload").value = "";
-    //   dojo.forEach(data, function(d){
-    //     dojo.byId("fileToUpload").value += "("+d.percent+"%) "+d.name+" \n";
-    //   });
-    // });
-  
-    // on(imageFileEl, "onComplete", function(data){
-    //   console.warn("onComplete", data);
-    //   dojo.forEach(data, function(d){
-    //     dojo.byId("uploadedFiles").value += d.file+" \n";
-    //     dojo.byId("rgtCol").innerHTML += imageHTML(d);//'<img src="'+d.file+'" />';
-    //     rmFiles+=d.file+";";
-    //   });
-    // });
+      formEl.reset()
+      customBtnEl.disabled = true
+      lblErrorEl.innerHTML = ""
+      fileToUploadEl.innerHTML = ""
+    },
   });
 });
